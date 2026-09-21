@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Аня Сабинина — SMM-специалист</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==================== ОСНОВНЫЕ СТИЛИ ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #2b2b2b;
+            line-height: 1.6;
+            overflow-x: hidden;
+            /* Фоновое фото с нежно-голубым и розовым оттенком */
+            background: linear-gradient(135deg, rgba(220, 238, 251, 0.88), rgba(252, 228, 236, 0.88)), url('background.png') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        section {
+            padding: 50px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 35px;
+            text-align: center;
+            color: #3a4a5a;
+        }
+
+        /* ==================== АНИМАЦИЯ ПОЯВЛЕНИЯ ==================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: opacity, transform;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==================== КНОПКИ ==================== */
+        .btn {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            padding: 14px 20px;
+            background: linear-gradient(135deg, #f4a6c0, #e88ba8);
+            color: #fff;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(232, 139, 168, 0.3);
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(232, 139, 168, 0.45);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        /* ==================== НАВИГАЦИЯ ==================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 30px;
+            background: rgba(230, 242, 250, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(232, 139, 168, 0.15);
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: #3a4a5a;
+        }
+
+        .nav-links {
+            position: fixed;
+            right: -100%;
+            top: 0;
+            height: 100vh;
+            width: 300px;
+            background: linear-gradient(180deg, #e6f2fa, #fce4ec);
+            box-shadow: -5px 0 25px rgba(232, 139, 168, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            transition: right 0.3s ease;
+            z-index: 999;
+        }
+
+        .nav-links.active {
+            right: 0;
+        }
+
+        .nav-links a {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #3a4a5a;
+        }
+
+        .nav-links a:hover {
+            color: #e88ba8;
+        }
+
+        .burger {
+            display: flex;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+            z-index: 1000;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: #3a4a5a;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* ==================== БЛОК ОБО МНЕ ==================== */
+        #about {
+            padding-top: 110px;
+        }
+
+        .about-wrapper {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 40px;
+            align-items: start;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(5px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(232, 139, 168, 0.15);
+            box-shadow: 0 10px 30px rgba(232, 139, 168, 0.08);
+        }
+
+        .about-img-box {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(232, 139, 168, 0.15);
+        }
+
+        .about-img-box img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .about-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: #e88ba8;
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            color: #4a5a6a;
+            font-size: 0.95rem;
+        }
+
+        .education-box {
+            background: linear-gradient(135deg, #f0f8fd, #fdf0f5);
+            border: 1px solid rgba(232, 139, 168, 0.15);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 15px;
+        }
+
+        .education-box h4 {
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+            color: #3a4a5a;
+        }
+
+        .education-box p {
+            margin-bottom: 0;
+            font-size: 0.85rem;
+            color: #7a8a9a;
+        }
+
+        .formula {
+            margin-top: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #3a4a5a;
+            padding: 15px;
+            background: rgba(232, 139, 168, 0.1);
+            border-left: 4px solid #e88ba8;
+            border-radius: 0 10px 10px 0;
+        }
+
+        /* ==================== БЛОК ПРАЙС ==================== */
+        .price-intro {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(232, 139, 168, 0.15);
+            padding: 25px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .price-intro h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: #3a4a5a;
+        }
+
+        .price-intro p {
+            font-size: 0.9rem;
+            color: #7a8a9a;
+        }
+
+        .price-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .price-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(232, 139, 168, 0.15);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(232, 139, 168, 0.08);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .price-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(232, 139, 168, 0.15);
+            padding-bottom: 12px;
+            gap: 10px;
+        }
+
+        .price-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #3a4a5a;
+        }
+
+        .price-num {
+            color: #e88ba8;
+            font-weight: 700;
+        }
+
+        .price-cost {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #e88ba8;
+            background: rgba(232, 139, 168, 0.12);
+            padding: 6px 12px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .price-body p {
+            color: #5a6a7a;
+            margin-bottom: 12px;
+            font-size: 0.88rem;
+        }
+
+        .price-list {
+            margin-bottom: 15px;
+        }
+
+        .price-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            color: #4a5a6a;
+            font-size: 0.85rem;
+        }
+
+        .price-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #e88ba8;
+            font-weight: bold;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            background: linear-gradient(135deg, #e6f2fa, #fce4ec);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            color: #5a6a7a;
+        }
+
+        .tariffs-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+            margin-bottom: 20px;
+        }
+
+        .tariff-item {
+            background: linear-gradient(135deg, #f5fafd, #fdf5f8);
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(232, 139, 168, 0.12);
+        }
+
+        .tariff-item h5 {
+            font-size: 0.85rem;
+            color: #3a4a5a;
+            margin-bottom: 4px;
+        }
+
+        .selector-box {
+            margin-top: 35px;
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(232, 139, 168, 0.25);
+            border-radius: 16px;
+            padding: 25px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .selector-title {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            text-align: center;
+            color: #3a4a5a;
+        }
+
+        .selector-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(232, 139, 168, 0.12);
+            font-size: 0.9rem;
+            gap: 10px;
+        }
+
+        .selector-item:last-child {
+            border-bottom: none;
+        }
+
+        /* ==================== БЛОКИ РЕЗУЛЬТАТЫ И ОТЗЫВЫ ==================== */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .result-card, .review-card {
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(232, 139, 168, 0.15);
+            box-shadow: 0 4px 12px rgba(232, 139, 168, 0.08);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .result-card:hover, .review-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(232, 139, 168, 0.2);
+        }
+
+        .result-card img, .result-card video,
+        .review-card img, .review-card video {
+            width: 100%;
+            height: 100%;
+            max-height: 450px;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .result-card:hover img, .result-card:hover video,
+        .review-card:hover img, .review-card:hover video {
+            transform: scale(1.03);
+        }
+
+        /* ==================== ЛАЙТБОКС ==================== */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(58, 74, 90, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(232, 139, 168, 0.4);
+            transform: scale(0.9);
+            transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+        }
+
+        .lightbox.active .lightbox-content {
+            transform: scale(1);
+        }
+
+        .lightbox-content img,
+        .lightbox-content video {
+            display: block;
+            max-width: 90vw;
+            max-height: 85vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -45px;
+            right: 0;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            line-height: 1;
+            font-weight: 300;
+            transition: transform 0.2s ease, color 0.2s ease;
+            background: none;
+            border: none;
+            padding: 5px 10px;
+        }
+
+        .lightbox-close:hover {
+            transform: scale(1.15);
+            color: #f4a6c0;
+        }
+
+        /* ==================== БЛОК КОНТАКТЫ ==================== */
+        #contacts {
+            padding-top: 20px;
+            padding-bottom: 60px;
+        }
+
+        .contacts-wrapper {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(5px);
+            padding: 40px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(232, 139, 168, 0.15);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .contacts-wrapper h3 {
+            color: #3a4a5a;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #e6f2fa, #fce4ec);
+            border: 1px solid rgba(232, 139, 168, 0.15);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #3a4a5a;
+        }
+
+        .social-btn:hover {
+            background: linear-gradient(135deg, #dceefb, #f8d5e0);
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            font-size: 0.8rem;
+            color: #7a8a9a;
+            border-top: 1px solid rgba(232, 139, 168, 0.12);
+            background: rgba(230, 242, 250, 0.85);
+        }
+
+        /* ==================== АДАПТИВНОСТЬ ==================== */
+        @media (max-width: 992px) {
+            .price-cards {
+                grid-template-columns: 1fr;
+                max-width: 550px;
+                margin: 0 auto;
+            }
+
+            .about-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .about-img-box {
+                max-width: 320px;
+                margin: 0 auto;
+            }
+
+            .results-grid, .reviews-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            section {
+                padding: 35px 15px;
+            }
+
+            .results-grid, .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .selector-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <div class="nav-container">
+            <a href="#about" class="logo">A.SABININA</a>
+            <div class="burger" id="burger" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </header>
+
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#about" onclick="closeMenu()">Обо мне</a></li>
+        <li><a href="#price" onclick="closeMenu()">Услуги и Прайс</a></li>
+        <li><a href="#results" onclick="closeMenu()">Результаты</a></li>
+        <li><a href="#reviews" onclick="closeMenu()">Отзывы</a></li>
+        <li><a href="#contacts" onclick="closeMenu()">Контакты</a></li>
+    </ul>
+
+    <!-- Обо мне -->
+    <section id="about">
+        <h2 class="section-title reveal">Обо мне</h2>
+        <div class="about-wrapper reveal">
+            <div class="about-img-box">
+                <img src="about.png" alt="Аня Сабинина SMM">
+            </div>
+            <div class="about-text">
+                <h3>Кто я</h3>
+                <p>Я Аня Сабинина — SMM-специалист. 5 лет занимаюсь продвижением в социальных сетях.</p>
+                <p>Работаю с блогерами, экспертами, бизнесом и теми, кто только выходит в онлайн: помогаю развивать соцсети, находить аудиторию и клиентов, сотрудничать с брендами и осваивать онлайн-профессии.</p>
+                
+                <div class="education-box">
+                    <h4>Высшее профильное образование</h4>
+                    <p>PR, специалист по связям с общественностью.</p>
+                </div>
+
+                <div class="education-box">
+                    <h4>Постоянное повышение квалификации</h4>
+                    <p>Проходила обучения у Жгенти, Полянской, Тимочко, Митрошиной, Сенаторова и других экспертов.</p>
+                </div>
+
+                <div class="formula">
+                    5 лет практики + профильное образование + десятки обучений = система, которую я адаптирую конкретно под вашу нишу и цели.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Прайс -->
+    <section id="price">
+        <h2 class="section-title reveal">Услуги и Прайс</h2>
+
+        <div class="price-intro reveal">
+            <h3>Системный подход к вашим соцсетям</h3>
+            <p>Выберите формат работы, который подходит под ваши задачи: от единичной консультации до полного освоения профессии.</p>
+        </div>
+
+        <div class="price-cards">
+            
+            <!-- Консультация -->
+            <div class="price-card reveal">
+                <div>
+                    <div class="price-header">
+                        <div class="price-title">
+                            <span class="price-num">01.</span> КОНСУЛЬТАЦИЯ
+                        </div>
+                        <div class="price-cost">3 490 ₽</div>
+                    </div>
+                    <div class="price-body">
+                        <p>Конкретный план под вашу нишу, аккаунт и задачу. Заранее анализирую ваши соцсети, контент, конкурентов и запрос.</p>
+                        
+                        <h5 style="margin-bottom: 8px; color: #3a4a5a;">Что разбираем:</h5>
+                        <ul class="price-list">
+                            <li><strong>Упаковку и позиционирование:</strong> кто вы, о чём ваш блог и как привлекать целевых подписчиков.</li>
+                            <li><strong>Контент:</strong> Stories, посты, Reels, хуки, алгоритмы + ищем рабочий формат Reels.</li>
+                            <li><strong>Продвижение и продажи:</strong> бесплатные и платные способы, воронки и продуктовую линейку.</li>
+                            <li><strong>Дополнительно:</strong> съёмка и монтаж, офлайн-маркетинг, ChatGPT как помощник.</li>
+                        </ul>
+
+                        <h5 style="margin-bottom: 8px; color: #3a4a5a;">Результат:</h5>
+                        <ul class="price-list">
+                            <li>Стратегия продвижения • Рекомендации по оформлению</li>
+                            <li>Банк идей • 3 готовых сценария разговорных Reels</li>
+                            <li>Полезные материалы • Дальнейшая обратная связь</li>
+                        </ul>
+                        
+                        <div class="tags">
+                            <span class="tag">Instagram</span><span class="tag">Telegram</span><span class="tag">VK</span>
+                            <span class="tag">YouTube</span><span class="tag">Pinterest</span><span class="tag">TikTok</span>
+                        </div>
+                    </div>
+                </div>
+                <a href="https://t.me/Anya_Sabinina" target="_blank" class="btn">Записаться</a>
+            </div>
+
+            <!-- Интенсив -->
+            <div class="price-card reveal">
+                <div>
+                    <div class="price-header">
+                        <div class="price-title">
+                            <span class="price-num">02.</span> ИНТЕНСИВ «КОД БЛОГА»
+                        </div>
+                        <div class="price-cost">от 5 990 ₽</div>
+                    </div>
+                    <div class="price-body">
+                        <p>Для тех, кто хочет понимания, как получат аудиторию, клиентов и сотрудничества через соцсети.</p>
+                        <p style="color: #e88ba8; font-weight: 600; font-size: 0.85rem; margin-bottom: 15px;">Блог + продвижение + продажи + 3 онлайн-профессии</p>
+                        
+                        <ul class="price-list">
+                            <li><strong>Instagram, Telegram, VK, Threads, Авито:</strong> алгоритмы, продвижение, контент.</li>
+                            <li><strong>Воронки и продажи:</strong> превращение просмотров в клиентов.</li>
+                            <li><strong>3 Профессии:</strong> UGC-креатор, AI-креатор, SMM-менеджер.</li>
+                        </ul>
+
+                        <div class="tariffs-grid">
+                            <div class="tariff-item">
+                                <h5>САМОСТОЯТЕЛЬНЫЙ — 5 990 ₽</h5>
+                                <p style="font-size: 0.78rem; color: #7a8a9a;">Все уроки + материалы + чат + доступ навсегда.</p>
+                            </div>
+                            <div class="tariff-item">
+                                <h5>С СОПРОВОЖДЕНИЕМ — 11 990 ₽</h5>
+                                <p style="font-size: 0.78rem; color: #7a8a9a;">Практическая неделя работы с двумя специалистами.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="https://t.me/Anya_Sabinina" target="_blank" class="btn">Узнать программу / Записаться</a>
+            </div>
+
+            <!-- Обучение -->
+            <div class="price-card reveal">
+                <div>
+                    <div class="price-header">
+                        <div class="price-title">
+                            <span class="price-num">03.</span> ОБУЧЕНИЕ SMM
+                        </div>
+                        <div class="price-cost">от 22 000 ₽</div>
+                    </div>
+                    <div class="price-body">
+                        <p>Индивидуальное обучение SMM с выходом на реальную работу с клиентами (3 месяца).</p>
+
+                        <div class="tariffs-grid" style="margin-top: 25px;">
+                            <div class="tariff-item">
+                                <h5>SMM + МАРКЕТИНГ</h5>
+                                <div style="color: #e88ba8; font-weight: 700; font-size: 1.1rem; margin-top: 5px;">22 000 ₽</div>
+                            </div>
+                            <div class="tariff-item">
+                                <h5>SMM + МАРКЕТИНГ + ТРАФИК + AI</h5>
+                                <div style="color: #e88ba8; font-weight: 700; font-size: 1.1rem; margin-top: 5px;">40 000 ₽</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="https://t.me/Anya_Sabinina" target="_blank" class="btn">Узнать программу / Записаться</a>
+            </div>
+
+        </div>
+
+        <div class="selector-box reveal">
+            <h3 class="selector-title">Что выбрать?</h3>
+            <div class="selector-item">
+                <div><strong>КОНСУЛЬТАЦИЯ</strong> — Нужен разбор и план</div>
+                <div style="color: #e88ba8; font-weight: 700;">3 490 ₽</div>
+            </div>
+            <div class="selector-item">
+                <div><strong>«КОД БЛОГА»</strong> — Краткий курс + 3 профессии</div>
+                <div style="color: #e88ba8; font-weight: 700;">от 5 990 ₽</div>
+            </div>
+            <div class="selector-item">
+                <div><strong>ОБУЧЕНИЕ SMM</strong> — Полноценная профессия</div>
+                <div style="color: #e88ba8; font-weight: 700;">от 22 000 ₽</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- РЕЗУЛЬТАТЫ -->
+    <section id="results">
+        <h2 class="section-title reveal">Результаты</h2>
+        <div class="results-grid">
+            <div class="result-card reveal" onclick="openLightbox('result1.png', 'image')">
+                <img src="result1.png" alt="Статистика 1">
+            </div>
+            <div class="result-card reveal" onclick="openLightbox('result2.png', 'image')">
+                <img src="result2.png" alt="Статистика 2">
+            </div>
+            <div class="result-card reveal" onclick="openLightbox('result3.png', 'image')">
+                <img src="result3.png" alt="Статистика 3">
+            </div>
+            <div class="result-card reveal" onclick="openLightbox('result4.png', 'image')">
+                <img src="result4.png" alt="Статистика 4">
+            </div>
+            <div class="result-card reveal" onclick="openLightbox('result1.mov', 'video')">
+                <video preload="metadata">
+                    <source src="result1.mov" type="video/quicktime">
+                    <source src="result1.mov" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- ОТЗЫВЫ -->
+    <section id="reviews">
+        <h2 class="section-title reveal">Отзывы</h2>
+        <div class="reviews-grid">
+            <div class="review-card reveal" onclick="openLightbox('review1.mov', 'video')">
+                <video preload="metadata">
+                    <source src="review1.mov" type="video/quicktime">
+                    <source src="review1.mov" type="video/mp4">
+                </video>
+            </div>
+            <div class="review-card reveal" onclick="openLightbox('review1.png', 'image')">
+                <img src="review1.png" alt="Отзыв 1">
+            </div>
+            <div class="review-card reveal" onclick="openLightbox('review2.png', 'image')">
+                <img src="review2.png" alt="Отзыв 2">
+            </div>
+            <div class="review-card reveal" onclick="openLightbox('review3.png', 'image')">
+                <img src="review3.png" alt="Отзыв 3">
+            </div>
+            <div class="review-card reveal" onclick="openLightbox('review4.png', 'image')">
+                <img src="review4.png" alt="Отзыв 4">
+            </div>
+            <div class="review-card reveal" onclick="openLightbox('review5.png', 'image')">
+                <img src="review5.png" alt="Отзыв 5">
+            </div>
+            <div class="review-card reveal" onclick="openLightbox('review6.png', 'image')">
+                <img src="review6.png" alt="Отзыв 6">
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contacts">
+        <h2 class="section-title reveal">Контакты</h2>
+        <div class="contacts-wrapper reveal">
+            <h3>Связаться со мной</h3>
+            <p style="color: #7a8a9a; margin-top: 8px; font-size: 0.9rem;">Отвечу на любые вопросы и помогу с выбором формата.</p>
+            
+            <div class="social-links">
+                <a href="https://t.me/Anya_Sabinina" target="_blank" class="social-btn">
+                    ✈️ Telegram: @Anya_Sabinina
+                </a>
+                <a href="https://www.instagram.com/anya.sabinina?stkn=MThrYmhuN3Q2bWo4MA%3D%3D&utm_source=qr" target="_blank" class="social-btn">
+                    📷 Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Аня Сабинина. Все права защищены.</p>
+    </footer>
+
+    <!-- ЛАЙТБОКС -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <button class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
+            <div id="lightboxMedia"></div>
+        </div>
+    </div>
+
+    <script>
+        // ==================== МЕНЮ ====================
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.remove('active');
+        }
+
+        // ==================== ПЛАВНОЕ ПОЯВЛЕНИЕ ПРИ СКРОЛЛЕ ====================
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.12,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // ==================== ЛАЙТБОКС ====================
+        const lightbox = document.getElementById('lightbox');
+        const lightboxMedia = document.getElementById('lightboxMedia');
+        let currentVideo = null;
+
+        function openLightbox(src, type) {
+            lightboxMedia.innerHTML = '';
+
+            if (type === 'image') {
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = 'Просмотр';
+                lightboxMedia.appendChild(img);
+            } else if (type === 'video') {
+                const video = document.createElement('video');
+                video.src = src;
+                video.controls = true;
+                video.autoplay = true;
+                video.playsInline = true;
+                video.preload = 'metadata';
+                video.style.maxWidth = '90vw';
+                video.style.maxHeight = '85vh';
+                lightboxMedia.appendChild(video);
+                currentVideo = video;
+            }
+
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(event) {
+            if (event) {
+                event.stopPropagation();
+            }
+
+            if (currentVideo) {
+                currentVideo.pause();
+                currentVideo.src = '';
+                currentVideo = null;
+            }
+
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+
+            setTimeout(() => {
+                lightboxMedia.innerHTML = '';
+            }, 350);
+        }
+
+        // Закрытие по Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightbox(e);
+            }
+        });
+    </script>
+</body>
+</html>
